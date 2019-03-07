@@ -1,5 +1,8 @@
 package com.stylefeng.guns.rest.modular.film;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.stylefeng.guns.api.film.FilmServiceApi;
+import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVO;
 import com.stylefeng.guns.rest.modular.vo.ResponseVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/film/")
 public class FilmController {
+
+    @Reference(interfaceClass = FilmServiceApi.class)
+    private FilmServiceApi filmServiceApi;
 
     //获取首页信息接口【API聚合】
     /*
@@ -29,14 +35,26 @@ public class FilmController {
         //测试Lombok
         //BannerVO bannerVO = new BannerVO();
         //bannerVO.getBannerAddress();
-
+        FilmIndexVO filmIndexVO = new FilmIndexVO();
 
         //获取banner信息
+        filmIndexVO.setBanners(filmServiceApi.getBanners());
+
         //获取正在热映电影
+        filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true,8));
+
         //即将上映电影
+        filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true,8));
+
         //票房排行榜
+        filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking());
+
         //获取受欢迎榜单
+        filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking());
+
         //获取前一百
-        return null;
+        filmIndexVO.setTop100(filmServiceApi.getTop());
+
+        return ResponseVO.success(filmIndexVO);
     }
 }
