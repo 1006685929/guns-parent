@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +29,15 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
 
     @Autowired
     private MoocFilmTMapper moocFilmTMapper;
+
+    @Autowired
+    private MoocCatDictTMapper moocCatDictTMapper;
+
+    @Autowired
+    private MoocYearDictTMapper moocYearDictTMapper;
+
+    @Autowired
+    private MoocSourceDictTMapper moocSourceDictTMapper;
 
     @Override
     public List<BannerVO> getBanners() {
@@ -188,5 +196,53 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
 
         return filmInfos;
 
+    }
+
+    @Override
+    public List<CatVO> getCats() {
+
+        List<CatVO> cats = new ArrayList<>();
+        //查询实体对象-MoocCatDictT
+        List<MoocCatDictT> moocCats = moocCatDictTMapper.selectList(null);
+        //将实体对象转换为业务对象 - CatVO
+        for (MoocCatDictT moocCatDictT : moocCats){
+            CatVO catVO = new CatVO();
+            catVO.setCatId(moocCatDictT.getUuid()+"");
+            catVO.setCatName(moocCatDictT.getShowName());
+
+            cats.add(catVO);
+        }
+        return cats;
+    }
+
+    @Override
+    public List<SourceVO> getSources() {
+        List<SourceVO> sources = new ArrayList<>();
+        List<MoocSourceDictT> moocSourceDictTS = moocSourceDictTMapper.selectList(null);
+        for (MoocSourceDictT moocSourceDictT :moocSourceDictTS){
+            SourceVO sourceVo = new SourceVO();
+            sourceVo.setSourceId(moocSourceDictT.getUuid()+"");
+            sourceVo.setSourceName(moocSourceDictT.getShowName());
+
+            sources.add(sourceVo);
+        }
+        return sources;
+    }
+
+    @Override
+    public List<YearVO> getYears() {
+
+        List<YearVO> years = new ArrayList<>();
+        //查询实体对象-MoocYearDictT
+        List<MoocYearDictT> moocYears = moocYearDictTMapper.selectList(null);
+        //将实体对象转换为业务对象 - YearVO
+        for (MoocYearDictT moocYearDictT : moocYears){
+            YearVO yearVO = new YearVO();
+            yearVO.setYearId(moocYearDictT.getUuid()+"");
+            yearVO.setYearName(moocYearDictT.getShowName());
+
+            years.add(yearVO);
+        }
+        return years;
     }
 }
