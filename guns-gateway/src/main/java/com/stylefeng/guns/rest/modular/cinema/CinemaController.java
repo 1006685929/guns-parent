@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/cinema/")
 public class CinemaController {
 
-    @Reference(interfaceClass = CinemaServiceApi.class,check = false)
+    @Reference(interfaceClass = CinemaServiceApi.class,connections = 10,cache = "lru",check = false)
     private CinemaServiceApi cinemaServiceApi;
 
     private static final String IMG_PRE = "http://img.meetingshop.cn/";
@@ -51,6 +51,10 @@ public class CinemaController {
     }
 
     //获取影院列表查询条件
+    /*
+            1.热点数据 --》 放缓存
+            2.banner
+     */
     @RequestMapping(value = "getCondition")
     public ResponseVO getCondition(CinemaQueryVO cinemaQueryVO){
         try{
