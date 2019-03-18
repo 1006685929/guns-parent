@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.api.cinema.CinemaServiceApi;
 import com.stylefeng.guns.api.cinema.vo.FilmInfoVO;
 import com.stylefeng.guns.api.cinema.vo.OrderQueryVO;
@@ -43,22 +44,18 @@ public class DefaultOrderServiceImpl implements OrderServiceAPI {
 
     //验证座位编号是否为真
     @Override
-    public boolean isTrueSeats(String filedId, String seats) {
-
-        //根据filedId找到对应的座位位置图
-        String seatPath = moocOrderTMapper.getSeatsByFieldId(filedId);
-
-        //读取位置图，判断seats是否为真
+    public boolean isTrueSeats(String fieldId, String seats) {
+        // 根据FieldId找到对应的座位位置图
+        String seatPath = moocOrderTMapper.getSeatsByFieldId(fieldId);
+        // 读取位置图，判断seats是否为真
         String fileStrByAddress = ftpUtil.getFileStrByAddress(seatPath);
-
-        //将fileStrByAddress转换为JSON对象
+        // 将fileStrByAddress转换为JSON对象
         JSONObject jsonObject = JSONObject.parseObject(fileStrByAddress);
-        //seat=1,2,3    ids="1,3,4"
+        // seats=1,2,3   ids="1,3,4,5,6,7,88"
         String ids = jsonObject.get("ids").toString();
         // 每一次匹配上的，都给isTrue+1
         String[] seatArrs = seats.split(",");
         String[] idArrs = ids.split(",");
-
         int isTrue = 0;
         for (String id : idArrs) {
             for (String seat : seatArrs) {
@@ -181,17 +178,27 @@ public class DefaultOrderServiceImpl implements OrderServiceAPI {
      * @return
      */
     @Override
-    public List<OrderVO> getOrderByUserId(Integer userId) {
+    public Page<OrderVO> getOrderByUserId(Integer userId,Page<OrderVO> page) {
 
+        Page<OrderVO> result = new Page<>();
         if (userId == null){
             log.error("订单查询业务失败，用户编号未输入");
             return null;
         }else {
-            List<OrderVO> ordersByUserId = moocOrderTMapper.getOrdersByUserId(userId);
+            List<OrderVO> ordersByUserId = moocOrderTMapper.getOrdersByUserId(userId,page);
             if (ordersByUserId == null && ordersByUserId.size() == 0){
-                return new ArrayList<>();
+                result.setTotal(0);
+                result.setRecords(new ArrayList<>());
+                return result;
             }else {
-                return ordersByUserId;
+                // 获取订单总数
+                EntityWrapper<MoocOrderT> entityWrapper = new EntityWrapper<>();
+                entityWrapper.eq("order_user", userId);
+                Integer counts = moocOrderTMapper.selectCount(entityWrapper);
+                // 将结果放入Page
+                result.setTotal(counts);
+                result.setRecords(ordersByUserId);
+                return result;
             }
         }
     }

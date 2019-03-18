@@ -42,7 +42,12 @@ public class FTPUtil {
         }
     }
 
-    //输入一个路径，然后将路径里的文件转换成字符串返回
+    /**
+     * 输入一个路径，然后将路径里的文件转换成字符串返回给我
+     *
+     * @param fileAddress
+     * @return
+     */
     public String getFileStrByAddress(String fileAddress) {
         BufferedReader bufferedReader = null;
         try {
@@ -70,10 +75,9 @@ public class FTPUtil {
         return null;
     }
 
-
     public static void main(String[] args) {
         FTPUtil ftpUtil = new FTPUtil();
-        String fileStrByAddress = ftpUtil.getFileStrByAddress("123214.json");
+        String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/123214.json");
 
         System.out.println(fileStrByAddress);
     }
