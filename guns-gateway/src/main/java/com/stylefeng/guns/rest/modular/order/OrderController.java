@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hxk
  * 2019/3/16 17:50
@@ -23,8 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/order/")
 public class OrderController {
 
-    @Reference(interfaceClass = OrderServiceAPI.class,check = false)
+    @Reference(interfaceClass = OrderServiceAPI.class,
+            check = false,
+            group = "order2018")
     private OrderServiceAPI orderServiceAPI;
+
+    @Reference(interfaceClass = OrderServiceAPI.class,
+            check = false,
+            group = "order2017")
+    private OrderServiceAPI orderServiceAPI2017;
 
     /**
      *   //开始购票
@@ -86,7 +96,16 @@ public class OrderController {
         if (userId != null && userId.trim().length()>0){
             Page<OrderVO> result = orderServiceAPI.getOrderByUserId(Integer.parseInt(userId), page);
 
-            return ResponseVO.success(nowPage,(int) result.getPages(),"",result.getRecords());
+            Page<OrderVO> result2017 = orderServiceAPI2017.getOrderByUserId(Integer.parseInt(userId), page);
+
+            //合并结果
+            int totalPages = (int)(result.getPages()+result2017.getPages());
+            //2017和2018总数合并
+            List<OrderVO> orderVOList = new ArrayList<>();
+            orderVOList.addAll(result.getRecords());
+            orderVOList.addAll(result2017.getRecords());
+
+            return ResponseVO.success(nowPage,totalPages,"",orderVOList);
         }else {
             return ResponseVO.serviceFail("用户未登录");
         }
