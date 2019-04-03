@@ -70,7 +70,7 @@ public class CinemaController {
             CinemaConditionResponseVO cinemaConditionResponseVO = new CinemaConditionResponseVO();
             cinemaConditionResponseVO.setAreaList(areas);
             cinemaConditionResponseVO.setBrandList(brands);
-            cinemaConditionResponseVO.setHallTypeList(hallTypes);
+            cinemaConditionResponseVO.setHalltypeList(hallTypes);
 
             return ResponseVO.success(cinemaConditionResponseVO);
         }catch (Exception e) {

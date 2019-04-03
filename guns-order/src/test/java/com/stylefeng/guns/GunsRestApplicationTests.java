@@ -18,7 +18,7 @@ public class GunsRestApplicationTests {
 	@Test
 	public void contextLoads() {
 
-		String fileStrByAddress = ftpUtil.getFileStrByAddress("123214.json");
+		String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/123214.json");
 
 		System.out.println(fileStrByAddress);
 	}

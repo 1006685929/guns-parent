@@ -17,6 +17,6 @@ public class CinemaConditionResponseVO {
 
     private List<BrandVO> brandList;
     private List<AreaVO> areaList;
-    private List<HallTypeVO> hallTypeList;
+    private List<HallTypeVO> halltypeList;
 
 }
