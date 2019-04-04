@@ -29,7 +29,7 @@ public class CinemaController {
     @Reference(interfaceClass = CinemaServiceApi.class,connections = 10,cache = "lru",check = false)
     private CinemaServiceApi cinemaServiceApi;
 
-    @Reference(interfaceClass = OrderServiceAPI.class,check = false)
+    @Reference(interfaceClass = OrderServiceAPI.class,check = false,group = "order2018")
     private OrderServiceAPI orderServiceAPI;
 
     private static final String IMG_PRE = "http://img.meetingshop.cn/";
