@@ -207,7 +207,7 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi{
         cinemaInfoVO.setCinemaPhone(moocCinemaT.getCinemaPhone());
         cinemaInfoVO.setCinemaName(moocCinemaT.getCinemaName());
         cinemaInfoVO.setCinemaId(moocCinemaT.getUuid()+"");
-        cinemaInfoVO.setCinemaId(moocCinemaT.getCinemaAddress());
+        cinemaInfoVO.setCinemaAdress(moocCinemaT.getCinemaAddress());
 
         return cinemaInfoVO;
     }
