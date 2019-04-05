@@ -108,10 +108,10 @@ public class FTPUtil {
         }
     }
 
-    public static void main(String[] args) {
-        FTPUtil ftpUtil = new FTPUtil();
-        String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/123214.json");
-
-        System.out.println(fileStrByAddress);
-    }
+//    public static void main(String[] args) {
+//        FTPUtil ftpUtil = new FTPUtil();
+//        String fileStrByAddress = ftpUtil.getFileStrByAddress("seats/123214.json");
+//
+//        System.out.println(fileStrByAddress);
+//    }
 }
