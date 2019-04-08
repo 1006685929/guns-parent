@@ -15,7 +15,7 @@ ftp:
   port: 2100
   userName: ftp
   password: ftp
-  upload-path: /qrcode
+  upload-path: /qrcodes
 
 server:
   port: 8087 #项目端口

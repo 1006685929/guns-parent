@@ -109,7 +109,7 @@ public class CinemaController {
             HallInfoVO filmFieldInfo = cinemaServiceApi.getFilmFieldInfo(fieldId);
 
             // 造几个销售的假数据，后续会对接订单接口
-            filmFieldInfo.setSoldSeats("1,2");
+            filmFieldInfo.setSoldSeats(orderServiceAPI.getSoldSeatsByFieldId(fieldId));
 
             CinemaFieldResponseVO cinemaFieldResponseVO = new CinemaFieldResponseVO();
             cinemaFieldResponseVO.setCinemaInfo(cinemaInfoById);
@@ -118,7 +118,7 @@ public class CinemaController {
 
             return ResponseVO.success(IMG_PRE,cinemaFieldResponseVO);
         }catch (Exception e){
-            log.error("获取选座信息失败",e);
+            log.error("获取选座信息失败了",e);
             return ResponseVO.serviceFail("获取选座信息失败");
         }
     }
