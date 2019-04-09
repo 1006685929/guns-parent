@@ -299,7 +299,7 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
         EntityWrapper<MoocFilmT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("film_status","1");
 
-        Page<MoocFilmT> page = new Page<>(1,10,"film_box_office");
+        Page<MoocFilmT> page = new Page<>(1,10,"film_box_office",false);
 
         List<MoocFilmT> moocFilms = moocFilmTMapper.selectPage(page,entityWrapper);
 
@@ -320,7 +320,7 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
         EntityWrapper<MoocFilmT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("film_status","2");
 
-        Page<MoocFilmT> page = new Page<>(1,10,"film_preSaleNum");
+        Page<MoocFilmT> page = new Page<>(1,10,"film_preSaleNum",false);
 
         List<MoocFilmT> moocFilms = moocFilmTMapper.selectPage(page,entityWrapper);
 
@@ -341,7 +341,7 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
         EntityWrapper<MoocFilmT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("film_status","1");
 
-        Page<MoocFilmT> page = new Page<>(1,10,"film_score");
+        Page<MoocFilmT> page = new Page<>(1,10,"film_score",false);
 
         List<MoocFilmT> moocFilms = moocFilmTMapper.selectPage(page,entityWrapper);
 
