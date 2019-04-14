@@ -42,6 +42,8 @@ public class DefaultAliPayServiceImpl implements AliPayServiceAPI {
     @Reference(interfaceClass = OrderServiceAPI.class,check = false,group = "order2018")
     private OrderServiceAPI orderServiceAPI;
 
+    private String name="";
+
     @Autowired
     private FTPUtil ftpUtil;
 
@@ -61,7 +63,7 @@ public class DefaultAliPayServiceImpl implements AliPayServiceAPI {
         }else {
             AliPayInfoVO aliPayInfoVO = new AliPayInfoVO();
             aliPayInfoVO.setOrderId(orderId);
-            aliPayInfoVO.setQRCodeAddress(filePath);
+            aliPayInfoVO.setQRCodeAddress(name);
             return aliPayInfoVO;
         }
     }
@@ -235,7 +237,9 @@ public class DefaultAliPayServiceImpl implements AliPayServiceAPI {
                  String fileName = String.format("qr-%s.png",response.getOutTradeNo());
                 log.info("filePath:" + filePath);
                 File qrCodeImge = ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
-
+                log.info("fileName："+fileName);
+                name = fileName;
+                log.info("name:"+name);
                 boolean isSuccess = ftpUtil.uploadFile(fileName, qrCodeImge);
 
                 if (!isSuccess){
@@ -257,6 +261,6 @@ public class DefaultAliPayServiceImpl implements AliPayServiceAPI {
                 log.error("不支持的交易状态，交易返回异常!!!");
                 break;
         }
-        return filePath;
+        return name;
     }
 }

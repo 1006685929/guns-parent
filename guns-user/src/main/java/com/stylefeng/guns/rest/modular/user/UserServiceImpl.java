@@ -74,9 +74,9 @@ public class UserServiceImpl implements UserAPI {
         EntityWrapper<MoocUserT> entityWrapper = new EntityWrapper<>();
         entityWrapper.eq("user_name",username);
         Integer result = moocUserTMapper.selectCount(entityWrapper);
-        if (result!=null && result>0){
+        if (result!=null && result>0){   //用户名存在，不可用
             return false;
-        }else {
+        }else {                          //用户名不存在，可用
             return true;
         }
     }

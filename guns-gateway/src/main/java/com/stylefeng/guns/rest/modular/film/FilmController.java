@@ -25,7 +25,7 @@ import java.util.concurrent.Future;
 @RequestMapping("/film/")
 public class FilmController {
 
-    private static final String IMG_PRE="img.meetingshop.cn";
+    private static final String IMG_PRE="http://localhost/";
 
     @Reference(interfaceClass = FilmServiceApi.class,check = false)
     private FilmServiceApi filmServiceApi;

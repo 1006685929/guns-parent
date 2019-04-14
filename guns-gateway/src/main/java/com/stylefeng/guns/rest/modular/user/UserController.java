@@ -36,7 +36,7 @@ public class UserController {
 
         boolean isSuccess = userAPI.register(userModel);
         if (isSuccess){
-            return ResponseVO.success("注册成功");
+            return ResponseVO.success("恭喜您注册成功");
         }else {
             return ResponseVO.serviceFail("注册失败");
         }
@@ -45,10 +45,9 @@ public class UserController {
     //注册检查
     @RequestMapping(value = "check",method = RequestMethod.POST)
     public ResponseVO check(String username){
-
+        boolean notExists = userAPI.checkUsername(username);
         if (username != null && username.trim().length()>0){
             //当返回true时表示用户名可用
-            boolean notExists = userAPI.checkUsername(username);
             if (notExists){
                 return ResponseVO.success("用户名不存在");
             }else {

@@ -34,7 +34,7 @@ import java.util.List;
 @RequestMapping(value = "/order/")
 public class OrderController {
 
-    private static final String IMG_PRE = "";
+    private static final String IMG_PRE = "http://localhost:81/";
 
     private static TokenBucket tokenBucket = new TokenBucket();
 
