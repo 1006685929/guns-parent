@@ -55,11 +55,11 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi{
         if (cinemaQueryVO.getBrandId() != 99){
             entityWrapper.eq("brand_id",cinemaQueryVO.getBrandId());
         }
-        if (cinemaQueryVO.getDistrictId() != 99){
-            entityWrapper.eq("area_id",cinemaQueryVO.getDistrictId());
+        if (cinemaQueryVO.getAreaId() != 99){
+            entityWrapper.eq("area_id",cinemaQueryVO.getAreaId());
         }
-        if (cinemaQueryVO.getHallType() != 99){  //%#3#%
-            entityWrapper.like("hall_ids","%#+"+cinemaQueryVO.getHallType()+"+#%");
+        if (cinemaQueryVO.getHalltypeId() != 99){  //%#3#%
+            entityWrapper.like("hall_ids","#"+cinemaQueryVO.getHalltypeId()+"#");
         }
 
         // 将数据实体转换为业务实体
@@ -128,9 +128,9 @@ public class DefaultCinemaServiceImpl implements CinemaServiceApi{
     public List<AreaVO> getAreas(int areaId) {
         boolean flag = false;
         List<AreaVO> areaVOS = new ArrayList<>();
-        // 判断brandId是否存在
+        // 判断areaId是否存在
         MoocAreaDictT moocAreaDictT = moocAreaDictTMapper.selectById(areaId);
-        // 判断brandId 是否等于 99
+        // 判断areaId 是否等于 99
         if(areaId == 99 || moocAreaDictT==null || moocAreaDictT.getUuid() == null){
             flag = true;
         }

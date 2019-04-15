@@ -64,8 +64,8 @@ public class CinemaController {
         try{
             // 获取三个集合，然后封装成一个对象返回即可
             List<BrandVO> brands = cinemaServiceApi.getBrands(cinemaQueryVO.getBrandId());
-            List<AreaVO> areas = cinemaServiceApi.getAreas(cinemaQueryVO.getDistrictId());
-            List<HallTypeVO> hallTypes = cinemaServiceApi.getHallTypes(cinemaQueryVO.getHallType());
+            List<AreaVO> areas = cinemaServiceApi.getAreas(cinemaQueryVO.getAreaId());
+            List<HallTypeVO> hallTypes = cinemaServiceApi.getHallTypes(cinemaQueryVO.getHalltypeId());
 
             CinemaConditionResponseVO cinemaConditionResponseVO = new CinemaConditionResponseVO();
             cinemaConditionResponseVO.setAreaList(areas);

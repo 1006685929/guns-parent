@@ -8,8 +8,8 @@ import java.io.Serializable;
 public class CinemaQueryVO implements Serializable {
 
     private Integer brandId=99;
-    private Integer districtId=99;
-    private Integer hallType=99;
+    private Integer areaId=99;
+    private Integer halltypeId=99;
     private Integer pageSize=12;
     private Integer nowPage=1;
 
