@@ -180,7 +180,7 @@ public class FilmController {
     @RequestMapping(value = "getFilms",method = RequestMethod.GET)
     public ResponseVO getFilms(FilmRequestVO filmRequestVO) {
 
-        String img_pre = "http://img.meetingshop.cn/";
+        String img_pre = "http://localhost/";
 
         FilmVO filmVO = null;
         // 根据showType判断影片查询类型
@@ -277,6 +277,6 @@ public class FilmController {
         //组织成返回值
         filmDetail.setInfo04(infoRequestVO);
 
-        return ResponseVO.success("http://img.meeting.cn/",filmDetail);
+        return ResponseVO.success("https://p0.meituan.net/",filmDetail);
     }
 }

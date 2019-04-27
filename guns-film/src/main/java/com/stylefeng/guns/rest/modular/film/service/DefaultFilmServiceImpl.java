@@ -200,7 +200,7 @@ public class DefaultFilmServiceImpl implements FilmServiceApi{
             }
 
             //如果sortId，yearId，catId 不为99，则表示要按照对应得编号进行查询
-            if (sortId !=99){
+            if (sourceId !=99){
                 entityWrapper.eq("film_source",sourceId);
             }
             if (yearId !=99){

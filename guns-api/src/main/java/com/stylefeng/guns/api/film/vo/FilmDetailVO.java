@@ -17,7 +17,7 @@ public class FilmDetailVO implements Serializable{
     private String filmEnName;
     private String imgAddress;
     private String score;
-    private String scoreNum;
+    private String scoreNum;//多少人评分
     private String totalBox;
     private String info01;
     private String info02;
