@@ -30,7 +30,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Service(interfaceClass = OrderServiceAPI.class,group = "default")
+@Service(interfaceClass = OrderServiceAPI.class)
 public class DefaultOrderServiceImpl implements OrderServiceAPI {
 
     @Autowired

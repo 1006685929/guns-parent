@@ -25,7 +25,7 @@ import java.util.concurrent.Future;
 @RequestMapping("/film/")
 public class FilmController {
 
-    private static final String IMG_PRE="http://localhost/";
+    private static final String IMG_PRE="http://p0.meituan.net/";
 
     @Reference(interfaceClass = FilmServiceApi.class,check = false)
     private FilmServiceApi filmServiceApi;
@@ -180,7 +180,7 @@ public class FilmController {
     @RequestMapping(value = "getFilms",method = RequestMethod.GET)
     public ResponseVO getFilms(FilmRequestVO filmRequestVO) {
 
-        String img_pre = "http://localhost/";
+        String img_pre = "http://p0.meituan.net/";
 
         FilmVO filmVO = null;
         // 根据showType判断影片查询类型

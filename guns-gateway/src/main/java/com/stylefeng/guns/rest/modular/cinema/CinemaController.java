@@ -32,7 +32,7 @@ public class CinemaController {
     @Reference(interfaceClass = OrderServiceAPI.class,check = false,group = "order2018")
     private OrderServiceAPI orderServiceAPI;
 
-    private static final String IMG_PRE = "http://localhost/";
+    private static final String IMG_PRE = "http://p1.meituan.net/";
 
     //获取影院列表接口
     @RequestMapping(value = "getCinemas")
